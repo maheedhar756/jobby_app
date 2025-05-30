@@ -7,30 +7,28 @@
   overflow: hidden;
 }
 .home-heading {
-  font-family: 'inter';
   font-weight: bold;
   margin-top: 0px;
-  font-size: 36px;
+  font-size: 72px;
   color: white;
   text-align: left;
 }
 .home-para{
-  font-family: 'inter';
   margin-top: 0px;
-  font-size: 16px;
+  font-size: 32px;
   color: white;
   text-align: left;
 }
 .home-btn {
-  font-family: 'inter';
   font-weight: bold;
+  font-size: 25px;
   color: white;
   background-color: #3b82f6;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 20px 40px;
+  border-radius: 10px;
   cursor: pointer;
-  width: 130px;
+  width: 260px;
 }
 .home-content{
     display: flex;
@@ -39,5 +37,6 @@
     justify-content: center;
     height: 100vh;
     text-align: left;
-    margin: 20px;
+    margin-left: 6%;
+    margin-top: -5%;
 }

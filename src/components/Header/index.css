@@ -17,3 +17,18 @@
   font-size: 16px;
   font-weight: 500;
 }
+.website-logo {
+  width: 150px;
+  height: auto;
+  padding-left: 40%;
+}
+.logout-btn{
+  width: 8%;
+  padding: 12px;
+  background-color: #3b82f6;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}

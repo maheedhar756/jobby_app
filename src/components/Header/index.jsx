@@ -36,7 +36,7 @@ const Header = () => {
 
             <button
               type="button"
-              className="logout-desktop-btn"
+              className="logout-btn"
               onClick={onClickLogout}
             >
               Logout

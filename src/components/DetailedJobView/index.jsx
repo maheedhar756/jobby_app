@@ -1,0 +1,102 @@
+import {useState, useEffect} from 'react'
+import {useParams} from 'react-router'
+import Cookies from 'js-cookie'
+import './index.css'
+
+const DetailedJobView = () => {
+  const {id} = useParams()
+  const [jobDetails, setJobDetails] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
+  
+
+  useEffect(() => {
+    const fetchJobDetails = async () => {
+      const jwtToken = Cookies.get('jwt_token')
+      const apiUrl = `https://apis.ccbp.in/jobs/${id}`
+      const options = {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      }
+      const response = await fetch(apiUrl, options)
+      const fetchedData = await response.json()
+      const formattedData = {
+        job_details: {
+          id: fetchedData.job_details.id,
+          title: fetchedData.job_details.title,
+          company_logo_url: fetchedData.job_details.company_logo_url,
+          company_website_url: fetchedData.job_details.company_website_url,
+          job_description: fetchedData.job_details.job_description,
+          skills: fetchedData.job_details.skills.map(skill => ({
+            name: skill.name,
+            image_url: skill.image_url,
+          })),
+          life_at_company: {
+            description: fetchedData.job_details.life_at_company.description,
+            image_url: fetchedData.job_details.life_at_company.image_url,
+          },
+          location: fetchedData.job_details.location,
+          employment_type: fetchedData.job_details.employment_type,
+          package_per_annum: fetchedData.job_details.package_per_annum,
+          rating: fetchedData.job_details.rating,
+        },
+      }
+      setJobDetails(formattedData.job_details)
+      setIsLoading(false)
+    }
+    fetchJobDetails()
+  }, [])
+
+  const renderDetailedJobView = () => {
+    const {
+      title,
+      company_logo_url,
+      company_website_url,
+      job_description,
+      skills,
+      life_at_company,
+      location,
+      employment_type,
+      package_per_annum,
+      rating,
+    } = jobDetails
+    return (
+      <div className="job-details-container">
+        <div className="job-header">
+          <img src={company_logo_url} alt="company logo" className="job-logo" />
+          <div>
+            <h1 className="job-title">{title}</h1>
+            <div className="job-rating">⭐ {rating}</div>
+          </div>
+        </div>
+        <div className="job-info">
+          <span>{location}</span>
+          <span>{employment_type}</span>
+          <span>{package_per_annum}</span>
+        </div>
+        <a href={company_website_url} target="_blank" rel="noopener noreferrer" className="company-website-link">
+          Visit Company Website
+        </a>
+        <h2>Description</h2>
+        <p>{job_description}</p>
+        <h3>Skills</h3>
+        <ul className="skills-list">
+          {skills.map(skill => (
+            <li key={skill.name} className="skill-item">
+              <img src={skill.image_url} alt={skill.name} className="skill-img" />
+              <span>{skill.name}</span>
+            </li>
+          ))}
+        </ul>
+        <h3>Life at Company</h3>
+        <div className="life-at-company">
+          <p>{life_at_company.description}</p>
+          <img src={life_at_company.image_url} alt="life at company" className="life-img" />
+        </div>
+      </div>
+    )
+  }
+}
+
+export default DetailedJobView

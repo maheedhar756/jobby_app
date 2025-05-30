@@ -82,17 +82,13 @@ const LoginForm = () => {
   }
   return (
     <div className="login-form-container">
-      <img
+      
+      <form className="form-container" onSubmit={submitForm}>
+        <img
         src="https://assets.ccbp.in/frontend/react-js/logo-img.png"
         alt="website logo"
         className="login-website-logo-mobile-img"  
       />
-      <form className="form-container" onSubmit={submitForm}>
-        <img
-          src="https://assets.ccbp.in/frontend/react-js/login-img.png"
-          alt="website login"
-          className="login-website-logo-desktop-img"
-        />
         <div className="input-container">
           {renderUsernameField()}
         </div>
