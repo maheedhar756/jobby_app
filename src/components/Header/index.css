@@ -1,0 +1,13 @@
+.nav-content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #282c34;
+  color: white;
+}
+.nav-menu {
+  display: flex;
+  gap: 20px;
+  list-style-type: none;
+}

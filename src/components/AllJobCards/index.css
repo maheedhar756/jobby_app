@@ -1,0 +1,11 @@
+.all-jobs-container{
+  display: flex;
+  height: 100vh;           /* Full viewport height */
+  overflow-y: auto;        /* Enable vertical scroll */
+  padding: 20px;
+  box-sizing: border-box;
+  background: #000000;     /* Or your preferred background */
+  list-style: none;        /* Remove bullets if using <ul> */
+  margin: 0;
+  flex-wrap: wrap;
+}
