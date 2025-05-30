@@ -6,24 +6,28 @@ const JobsCard = props => {
   } = job
 
   return (
-    <div className="job-card">
+    <li className="job-card">
       <div className="job-card-header">
-        <img src={company_logo_url} alt="company logo" className="company-logo" />
+        <img src={company_logo_url} alt="company logo" className="job-logo" />
         <div>
-          <h2 className="job-title">{title}</h2>
-          <p className="job-rating">⭐ {rating}</p>
+          <h1 className="job-title">{title}</h1>
+          <div className="job-rating">
+            <img
+              src="https://assets.ccbp.in/frontend/react-js/star-img.png"
+              alt="star"
+              className="star"
+            />
+            <span>{rating}</span>
+          </div>
         </div>
       </div>
-      <div className="job-card-details">
-        <p><b>Location:</b> {location}</p>
-        <p><b>Employment Type:</b> {employment_type}</p>
-        <p><b>Package:</b> {package_per_annum}</p>
+      <p className="job-description">{job_description}</p>
+      <div className="job-details">
+        <span className="job-location">{location}</span>
+        <span className="job-type">{employment_type}</span>
+        <span className="job-package">{package_per_annum}</span>
       </div>
-      <div className="job-card-description">
-        <h3>Description</h3>
-        <p>{job_description}</p>
-      </div>
-    </div>
+    </li>
   )
 }
 
