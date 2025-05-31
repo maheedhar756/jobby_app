@@ -1,10 +1,13 @@
 import {useState, useEffect} from 'react'
-import {useParams} from 'react-router'
+import {useParams} from 'react-router-dom' // <-- use this
 import Cookies from 'js-cookie'
+import Header from '../Header'
 import './index.css'
+import {FaLocationDot} from "react-icons/fa6";
+import { BsBriefcaseFill } from "react-icons/bs";
 
 const DetailedJobView = () => {
-  const {id} = useParams()
+  const {id} = useParams() // <-- get id from route
   const [jobDetails, setJobDetails] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   
@@ -12,7 +15,7 @@ const DetailedJobView = () => {
   useEffect(() => {
     const fetchJobDetails = async () => {
       const jwtToken = Cookies.get('jwt_token')
-      const apiUrl = `https://apis.ccbp.in/jobs/${id}`
+      const apiUrl = `https://apis.ccbp.in/jobs/${id}` // <-- use dynamic id
       const options = {
         method: 'GET',
         headers: {
@@ -46,7 +49,7 @@ const DetailedJobView = () => {
       setIsLoading(false)
     }
     fetchJobDetails()
-  }, [])
+  }, [id])
 
   const renderDetailedJobView = () => {
     const {
@@ -62,6 +65,8 @@ const DetailedJobView = () => {
       rating,
     } = jobDetails
     return (
+      <>
+      <Header />
       <div className="job-details-container">
         <div className="job-header">
           <img src={company_logo_url} alt="company logo" className="job-logo" />
@@ -71,10 +76,13 @@ const DetailedJobView = () => {
           </div>
         </div>
         <div className="job-info">
+          <FaLocationDot />
           <span>{location}</span>
+          <BsBriefcaseFill />
           <span>{employment_type}</span>
           <span>{package_per_annum}</span>
         </div>
+        <hr></hr>
         <a href={company_website_url} target="_blank" rel="noopener noreferrer" className="company-website-link">
           Visit Company Website
         </a>
@@ -95,8 +103,21 @@ const DetailedJobView = () => {
           <img src={life_at_company.image_url} alt="life at company" className="life-img" />
         </div>
       </div>
+      </>
     )
   }
+  return (
+    <div className="detailed-job-view">
+      {isLoading ? (
+        <div className="loading">Loading...</div>
+      ) : jobDetails ? (
+        renderDetailedJobView()
+      ) : (
+        <div className="error">Job details not found</div>
+      )}
+    </div>
+  )
+  return <>{renderDetailedJobView()}</>
 }
 
 export default DetailedJobView

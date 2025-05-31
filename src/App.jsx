@@ -5,6 +5,7 @@ import Jobs from './components/Jobs'
 import NotFound from './components/NotFound'
 import './App.css'
 import ProtectedRoute from './components/protectedRoute'
+import DetailedJobView from './components/DetailedJobView'
 
 const App = () => (
   <BrowserRouter>
@@ -26,6 +27,7 @@ const App = () => (
           </ProtectedRoute>
         }
       />
+      <Route path="/jobs/:id" element={<DetailedJobView />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   </BrowserRouter>

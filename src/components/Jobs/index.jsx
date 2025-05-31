@@ -3,7 +3,6 @@ import Header from '../Header'
 import './index.css'
 import ProfileCard from "../ProfileCard"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import DetailedJobView from '../DetailedJobView'
 
 const Jobs = () => {
   return (
@@ -20,7 +19,6 @@ const Jobs = () => {
             </div>
           </div>
         </div>
-        <DetailedJobView />
       </div>
     </>
   )
