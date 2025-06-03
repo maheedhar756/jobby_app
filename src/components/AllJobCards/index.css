@@ -1,11 +1,22 @@
-.all-jobs-container{
+.all-jobs-container {
   display: flex;
-  height: 100vh;           /* Full viewport height */
-  overflow-y: auto;        /* Enable vertical scroll */
-  padding: 20px;
+  flex-direction: column;
+  gap: 32px;
+  padding: 32px 24px;
+  background: #000000;
+  min-height: 100vh;
   box-sizing: border-box;
-  background: #000000;     /* Or your preferred background */
-  list-style: none;        /* Remove bullets if using <ul> */
+  list-style: none;
   margin: 0;
-  flex-wrap: wrap;
+  overflow-x: hidden;   /* Prevent horizontal scroll */
+  width: 100%;          /* Ensure it doesn't overflow parent */
+  max-width: 100vw;     /* Prevent overflow on wide screens */
+}
+
+.spinner-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
 }

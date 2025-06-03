@@ -38,13 +38,23 @@ const AllJobCards = () => {
   }, [navigate])
 
   return (
-    <ul className="all-jobs-container">
+    <div className="all-jobs-container">
       {isLoading ? (
-        <Triangle type="ThreeDots" color="#000" height={50} width={50} />
+        <div className="custom-spinner">
+          <Triangle
+            height="80"
+            width="80"
+            color="#4fa94d"
+            ariaLabel="triangle-loading"
+            wrapperStyle={{}}
+            wrapperClassName=""
+            visible={true}
+          />
+        </div>
       ) : (
         jobsList.map(job => <JobsCard key={job.id} job={job} />)
       )}
-    </ul>
+    </div>
   )
 }
 export default AllJobCards

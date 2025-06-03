@@ -5,6 +5,7 @@ import Header from '../Header'
 import './index.css'
 import {FaLocationDot} from "react-icons/fa6";
 import { BsBriefcaseFill } from "react-icons/bs";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 const DetailedJobView = () => {
   const {id} = useParams() // <-- get id from route
@@ -75,16 +76,20 @@ const DetailedJobView = () => {
             <div className="job-rating">⭐ {rating}</div>
           </div>
         </div>
-        <div className="job-info">
-          <FaLocationDot />
-          <span>{location}</span>
-          <BsBriefcaseFill />
-          <span>{employment_type}</span>
-          <span>{package_per_annum}</span>
+        <div className="job-info-row">
+          <span className="job-info-item">
+            <FaLocationDot className="job-info-icon" /> {location}
+          </span>
+          <span className="job-info-item">
+            <BsBriefcaseFill className="job-info-icon" /> {employment_type}
+          </span>
+          <span className="job-info-item job-package">
+            {package_per_annum}
+          </span>
         </div>
         <hr></hr>
         <a href={company_website_url} target="_blank" rel="noopener noreferrer" className="company-website-link">
-          Visit Company Website
+          Visit <FaExternalLinkAlt />
         </a>
         <h2>Description</h2>
         <p>{job_description}</p>
@@ -97,7 +102,7 @@ const DetailedJobView = () => {
             </li>
           ))}
         </ul>
-        <h3>Life at Company</h3>
+        <h3 className="life">Life at Company</h3>
         <div className="life-at-company">
           <p>{life_at_company.description}</p>
           <img src={life_at_company.image_url} alt="life at company" className="life-img" />
@@ -117,7 +122,6 @@ const DetailedJobView = () => {
       )}
     </div>
   )
-  return <>{renderDetailedJobView()}</>
 }
 
 export default DetailedJobView

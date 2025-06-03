@@ -30,6 +30,10 @@
   cursor: pointer;
   width: 260px;
 }
+.home-btn:hover {
+  background-color: #2563eb;
+  transition: background-color 0.3s ease;
+}
 .home-content{
     display: flex;
     flex-direction: column;
