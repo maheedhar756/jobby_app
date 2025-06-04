@@ -4,11 +4,13 @@ import {useNavigate} from 'react-router-dom'
 import JobsCard from '../JobsCard'
 import './index.css'
 import {Triangle} from 'react-loader-spinner'
-import './index.css'
 
 const AllJobCards = () => {
   const [jobsList, setJobsList] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const [search, setSearch] = useState('')
+  const [employmentTypes, setEmploymentTypes] = useState([])
+  const [salaryRange, setSalaryRange] = useState('')
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -37,8 +39,48 @@ const AllJobCards = () => {
     fetchJobs()
   }, [navigate])
 
+  const filteredJobs = jobsList.filter(job => {
+    const matchesSearch = job.title.toLowerCase().includes(search.toLowerCase())
+    const matchesEmployment =
+      employmentTypes.length === 0 || employmentTypes.includes(job.employment_type)
+    const matchesSalary =
+      !salaryRange || job.package_per_annum.replace(/[^\d]/g, '') >= salaryRange.replace(/[^\d]/g, '')
+    return matchesSearch && matchesEmployment && matchesSalary
+  })
+
+  const handleEmploymentTypeChange = type => {
+    setEmploymentTypes(prev =>
+      prev.includes(type)
+        ? prev.filter(t => t !== type)
+        : [...prev, type]
+    )
+  }
+
+  const handleSalaryRangeChange = range => {
+    setSalaryRange(range)
+  }
+
   return (
     <div className="all-jobs-container">
+      {/* Search Bar */}
+      <div className="job-search-bar" style={{marginBottom: '16px', position: 'relative'}}>
+        <input
+          type="text"
+          placeholder="Search jobs..."
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+        />
+        {search && (
+          <button
+            className="clear-search-btn"
+            onClick={() => setSearch('')}
+            aria-label="Clear search"
+            type="button"
+          >
+            &times;
+          </button>
+        )}
+      </div>
       {isLoading ? (
         <div className="custom-spinner">
           <Triangle
@@ -52,7 +94,7 @@ const AllJobCards = () => {
           />
         </div>
       ) : (
-        jobsList.map(job => <JobsCard key={job.id} job={job} />)
+        filteredJobs.map(job => <JobsCard key={job.id} job={job} />)
       )}
     </div>
   )
