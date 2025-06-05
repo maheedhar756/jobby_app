@@ -72,3 +72,18 @@
   align-items: center;
   min-height: 200px;
 }
+
+/* Example layout */
+.jobs-main {
+  display: flex;
+}
+.sidebar {
+  width: 300px;
+  min-width: 250px;
+  padding: 24px 16px;
+  background: #181818;
+}
+.jobs-content {
+  flex: 1;
+  padding: 24px;
+}

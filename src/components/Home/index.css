@@ -7,15 +7,16 @@
   overflow: hidden;
 }
 .home-heading {
+  font-size: clamp(1.5rem, 4vw, 2.5rem); /* Responsive between 1.5rem and 2.5rem */
   font-weight: bold;
-  margin-top: 0px;
-  font-size: 72px;
+  margin-bottom: 1rem;
   color: white;
   text-align: left;
 }
-.home-para{
-  margin-top: 0px;
-  font-size: 32px;
+.home-para {
+  font-size: clamp(1rem, 2vw, 1.25rem); /* Responsive between 1rem and 1.25rem */
+  margin-bottom: 2rem;
+  line-height: 1.6;
   color: white;
   text-align: left;
 }

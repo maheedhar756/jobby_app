@@ -1,3 +1,4 @@
+import { useState } from "react";
 import AllJobCards from "../AllJobCards";
 import Header from '../Header'
 import './index.css'
@@ -6,20 +7,43 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import JobFilters from "../JobFilters";
 
 const Jobs = () => {
+  const [employmentTypes, setEmploymentTypes] = useState([]);
+  const [salaryRange, setSalaryRange] = useState('');
+
+  const handleEmploymentTypeChange = (type) => {
+    setEmploymentTypes(prev =>
+      prev.includes(type)
+        ? prev.filter(t => t !== type)
+        : [...prev, type]
+    );
+  };
+
+  const handleSalaryRangeChange = (range) => {
+    setSalaryRange(range);
+  };
+
   return (
     <>
-      <div className="jobs-container">
+      <main className="jobs-container">
         <Header />
         <div className="jobs-content">
-          <div className="left-column">
+          <aside className="left-column">
             <ProfileCard />
-            <JobFilters />
-          </div>
-          <div className="right-column">
-            <AllJobCards />
-          </div>
+            <JobFilters
+              employmentTypes={employmentTypes}
+              onEmploymentTypeChange={handleEmploymentTypeChange}
+              salaryRange={salaryRange}
+              onSalaryRangeChange={handleSalaryRangeChange}
+            />
+          </aside>
+          <section className="right-column">
+            <AllJobCards
+              employmentTypes={employmentTypes}
+              salaryRange={salaryRange}
+            />
+          </section>
         </div>
-      </div>
+      </main>
     </>
   )
 }

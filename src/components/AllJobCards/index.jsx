@@ -5,12 +5,10 @@ import JobsCard from '../JobsCard'
 import './index.css'
 import {Triangle} from 'react-loader-spinner'
 
-const AllJobCards = () => {
+const AllJobCards = ({ employmentTypes = [], salaryRange = '' }) => {
   const [jobsList, setJobsList] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [search, setSearch] = useState('')
-  const [employmentTypes, setEmploymentTypes] = useState([])
-  const [salaryRange, setSalaryRange] = useState('')
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -20,13 +18,9 @@ const AllJobCards = () => {
         navigate('/login', {replace: true})
         return
       }
-
       const response = await fetch('https://apis.ccbp.in/jobs', {
-        headers: {
-          Authorization: `Bearer ${jwtToken}`,
-        },
+        headers: { Authorization: `Bearer ${jwtToken}` },
       })
-
       if (response.ok) {
         const data = await response.json()
         setJobsList(data.jobs)
@@ -35,10 +29,10 @@ const AllJobCards = () => {
       }
       setIsLoading(false)
     }
-
     fetchJobs()
   }, [navigate])
 
+  // Filtering logic using props
   const filteredJobs = jobsList.filter(job => {
     const matchesSearch = job.title.toLowerCase().includes(search.toLowerCase())
     const matchesEmployment =
@@ -48,21 +42,8 @@ const AllJobCards = () => {
     return matchesSearch && matchesEmployment && matchesSalary
   })
 
-  const handleEmploymentTypeChange = type => {
-    setEmploymentTypes(prev =>
-      prev.includes(type)
-        ? prev.filter(t => t !== type)
-        : [...prev, type]
-    )
-  }
-
-  const handleSalaryRangeChange = range => {
-    setSalaryRange(range)
-  }
-
   return (
     <div className="all-jobs-container">
-      {/* Search Bar */}
       <div className="job-search-bar" style={{marginBottom: '16px', position: 'relative'}}>
         <input
           type="text"
@@ -99,4 +80,5 @@ const AllJobCards = () => {
     </div>
   )
 }
+
 export default AllJobCards
