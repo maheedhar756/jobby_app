@@ -10,6 +10,12 @@ const JobsCard = props => {
   const handleJobClick = () => {
     navigate(`/jobs/${job.id}`)
   }
+  const EMPLOYMENT_TYPE_LABELS = {
+  FULLTIME: "Full Time",
+  PARTTIME: "Part Time",
+  FREELANCE: "Freelance",
+  INTERNSHIP: "Internship"
+};
 
   return (
     <>
@@ -29,6 +35,14 @@ const JobsCard = props => {
                 <span className="job-package">{package_per_annum}</span>
               </div>
             </div>
+          </div>
+          <div className="job-meta">
+            <span>
+              {location}
+            </span>
+            <span className="job-employment-type-badge">
+              {EMPLOYMENT_TYPE_LABELS[employment_type] || employment_type}
+            </span>
           </div>
           <hr />
           <h5>Description</h5>

@@ -1,5 +1,19 @@
 import './index.css'
 
+const EMPLOYMENT_OPTIONS = [
+  { id: 'fulltime', value: 'FULLTIME', label: 'Full Time' },
+  { id: 'parttime', value: 'PARTTIME', label: 'Part Time' },
+  { id: 'freelance', value: 'FREELANCE', label: 'Freelance' },
+  { id: 'internship', value: 'INTERNSHIP', label: 'Internship' },
+]
+
+const SALARY_OPTIONS = [
+  { id: '10lpa', value: '10LPA', label: '10 LPA and above' },
+  { id: '20lpa', value: '20LPA', label: '20 LPA and above' },
+  { id: '30lpa', value: '30LPA', label: '30 LPA and above' },
+  { id: '40lpa', value: '40LPA', label: '40 LPA and above' },
+]
+
 const JobFilters = ({
   employmentTypes = [],
   onEmploymentTypeChange = () => {},
@@ -9,94 +23,35 @@ const JobFilters = ({
   <div className="job-filters-container">
     <div className="filter-section">
       <h5 className="filter-title">Type of Employment</h5>
-      <div className="filter-option">
-        <input
-          type="checkbox"
-          id="fulltime"
-          value="FULLTIME"
-          checked={employmentTypes.includes('FULLTIME')}
-          onChange={() => onEmploymentTypeChange('FULLTIME')}
-        />
-        <label htmlFor="fulltime">Full Time</label>
-      </div>
-      <div className="filter-option">
-        <input
-          type="checkbox"
-          id="parttime"
-          value="PARTTIME"
-          checked={employmentTypes.includes('PARTTIME')}
-          onChange={() => onEmploymentTypeChange('PARTTIME')}
-        />
-        <label htmlFor="parttime">Part Time</label>
-      </div>
-      <div className="filter-option">
-        <input
-          type="checkbox"
-          id="freelance"
-          value="FREELANCE"
-          checked={employmentTypes.includes('FREELANCE')}
-          onChange={() => onEmploymentTypeChange('FREELANCE')}
-        />
-        <label htmlFor="freelance">Freelance</label>
-      </div>
-      <div className="filter-option">
-        <input
-          type="checkbox"
-          id="internship"
-          value="INTERNSHIP"
-          checked={employmentTypes.includes('INTERNSHIP')}
-          onChange={() => onEmploymentTypeChange('INTERNSHIP')}
-        />
-        <label htmlFor="internship">Internship</label>
-      </div>
+      {EMPLOYMENT_OPTIONS.map(opt => (
+        <div className="filter-option" key={opt.id}>
+          <input
+            type="checkbox"
+            id={opt.id}
+            value={opt.value}
+            checked={employmentTypes.includes(opt.value)}
+            onChange={() => onEmploymentTypeChange(opt.value)}
+          />
+          <label htmlFor={opt.id}>{opt.label}</label>
+        </div>
+      ))}
     </div>
     <hr className="filter-divider" />
     <div className="filter-section">
       <h5 className="filter-title">Salary Range</h5>
-      <div className="filter-option">
-        <input
-          type="radio"
-          id="10lpa"
-          name="salaryRange"
-          value="10LPA"
-          checked={salaryRange === '10LPA'}
-          onChange={() => onSalaryRangeChange('10LPA')}
-        />
-        <label htmlFor="10lpa">10 LPA and above</label>
-      </div>
-      <div className="filter-option">
-        <input
-          type="radio"
-          id="20lpa"
-          name="salaryRange"
-          value="20LPA"
-          checked={salaryRange === '20LPA'}
-          onChange={() => onSalaryRangeChange('20LPA')}
-        />
-        <label htmlFor="20lpa">20 LPA and above</label>
-      </div>
-      <div className="filter-option">
-        <input
-          type="radio"
-          id="30lpa"
-          name="salaryRange"
-          value="30LPA"
-          checked={salaryRange === '30LPA'}
-          onChange={() => onSalaryRangeChange('30LPA')}
-        />
-        <label htmlFor="30lpa">30 LPA and above</label>
-      </div>
-      <div className="filter-option">
-        <input
-          type="radio"
-          id="40lpa"
-          name="salaryRange"
-          value="40LPA"
-          checked={salaryRange === '40LPA'}
-          onChange={() => onSalaryRangeChange('40LPA')}
-        />
-        <label htmlFor="40lpa">40 LPA and above</label>
-      </div>
+      {SALARY_OPTIONS.map(opt => (
+        <div className="filter-option" key={opt.id}>
+          <input
+            type="radio"
+            id={opt.id}
+            name="salaryRange"
+            value={opt.value}
+            checked={salaryRange === opt.value}
+            onChange={() => onSalaryRangeChange(opt.value)}
+          />
+          <label htmlFor={opt.id}>{opt.label}</label>
+        </div>
+      ))}
     </div>
   </div>
 )

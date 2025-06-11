@@ -32,11 +32,13 @@ const AllJobCards = ({ employmentTypes = [], salaryRange = '' }) => {
     fetchJobs()
   }, [navigate])
 
-  // Filtering logic using props
   const filteredJobs = jobsList.filter(job => {
     const matchesSearch = job.title.toLowerCase().includes(search.toLowerCase())
     const matchesEmployment =
-      employmentTypes.length === 0 || employmentTypes.includes(job.employment_type)
+      employmentTypes.length === 0 ||
+      employmentTypes.includes(
+        (job.employment_type || '').replace(/\s/g, '').toUpperCase()
+      )
     const matchesSalary =
       !salaryRange || job.package_per_annum.replace(/[^\d]/g, '') >= salaryRange.replace(/[^\d]/g, '')
     return matchesSearch && matchesEmployment && matchesSalary

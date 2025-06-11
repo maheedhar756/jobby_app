@@ -180,3 +180,32 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+.job-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 8px 0;
+}
+
+.job-location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 15px;
+  color: #ccc;
+}
+
+.meta-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.job-employment-type-badge {
+  background: #222;
+  color: #fff;
+  border-radius: 12px;
+  padding: 2px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-block;
+}
